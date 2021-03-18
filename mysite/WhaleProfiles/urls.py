@@ -5,7 +5,6 @@ from . import views
 app_name = 'WhaleProfiles'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('', views.addSpecie, name='addSpecie'),
-    path('', views.editSpecie, name='editSpecie'),
-    path('', views.speciesPage, name='speciesPage')
+    path('addSpecie/', views.addSpecie, name='addSpecie'),
+    path('editSpecie/', views.editSpecie, name='editSpecie'),
 ]
