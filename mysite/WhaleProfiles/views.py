@@ -39,5 +39,9 @@ def addSpecie(request):
     return HttpResponse("Where the user can create new species to add data")
 
 def editSpecie(request):
+    whales = Specie.objects.all()
+    context = {
+            'whales': whales
+    }
     template = loader.get_template('WhaleProfiles/editSpecie.html')
-    return HttpResponse("Where the user can edit already existing species")
+    return HttpResponse(template.render(context, request))
