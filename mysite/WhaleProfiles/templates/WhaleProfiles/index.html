@@ -18,7 +18,7 @@
 
         <!-- If someone is logged in, we welocme them and give them <thead>
           opportunity to log out. -->
-        <h3>Welcome, {{ user.first_name }} {{ user.last_name }}</h3>
+        <h3>Welcome, {{ user.username }}</h3>
 
         <!-- Use POST for sure any time you are dealing with login/logout info.
           In general, you should use POST unless you have a good reason not to.
@@ -58,6 +58,23 @@
           <button type="submit" class="btn btn-danger">Login</button>
         </form>
       {% endif %}
+
+      <br />
+      {% for user in allUsers %}
+      {{user.username}}
+      {{user.password}}
+      <br />
+      {% endfor %}
+
+      <br />
+      {% for whale in whales %}
+      {{whale.name}}
+      {{whale.numWhales}}
+      <br />
+      {% endfor %}
+
+      {{loggedIn}}
+
       <!-- End login/logout section. -->
       Account Login/Sign Up, Species list to see data for each species.
     </div>

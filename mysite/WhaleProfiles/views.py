@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
 def index(request):
+    allUsers = User.objects.all()
+    whales = Specie.objects.all()
     if request.POST:
         # This tests if the form is the log *in* form
         if 'inputUsername' in request.POST.keys():
@@ -30,18 +32,24 @@ def index(request):
 
     template = loader.get_template('WhaleProfiles/index.html')
     context = {
-            'user': request.user
+            'allUsers': allUsers,
+            'user': request.user,
+            'whales': whales,
+            'loggedIn': loggedIn
     }
     return HttpResponse(template.render(context, request))
 
 def addSpecie(request):
+    context = {
+
+    }
     template = loader.get_template('WhaleProfiles/addSpecie.html')
-    return HttpResponse("Where the user can create new species to add data")
+    return HttpResponse(template.render(context, request))
 
 def editSpecie(request):
     whales = Specie.objects.all()
     context = {
-            'whales': whales
+            #'whales': whales
     }
     template = loader.get_template('WhaleProfiles/editSpecie.html')
     return HttpResponse(template.render(context, request))
