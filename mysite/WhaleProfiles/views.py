@@ -24,21 +24,6 @@ def index(request):
         elif 'logout' in request.POST.keys():
             # If so, don't need to check anything else, just kill the session.
             logout(request)
-    # After we check the forms, set a flag for use in the template.
-    if request.user.is_authenticated:
-        loggedIn = True
-    else:
-        loggedIn = False
-
-    template = loader.get_template('WhaleProfiles/index.html')
-    context = {
-            'allUsers': allUsers,
-            'user': request.user,
-            'whales': whales,
-            'loggedIn': loggedIn
-    }
-    return HttpResponse(template.render(context, request))
-
 def addSpecie(request):
     context = {
 
