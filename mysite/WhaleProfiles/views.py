@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     allUsers = User.objects.all()
     whales = Specie.objects.all()
-    if request.POST:
+    if request.method == "POST":
         # This tests if the form is the log *in* form
         if 'inputUsername' in request.POST.keys():
             # IF so, try to authentircate
@@ -24,6 +24,14 @@ def index(request):
         elif 'logout' in request.POST.keys():
             # If so, don't need to check anything else, just kill the session.
             logout(request)
+
+    context = {
+    'allUsers': allUsers,
+    'whales': whales
+    }
+
+    template = loader.get_template('WhaleProfiles/index.html')
+    return HttpResponse(template.render(context, request))
 def addSpecie(request):
     context = {
 
@@ -34,7 +42,7 @@ def addSpecie(request):
 def editSpecie(request):
     whales = Specie.objects.all()
     context = {
-            #'whales': whales
+            'whales': whales
     }
     template = loader.get_template('WhaleProfiles/editSpecie.html')
     return HttpResponse(template.render(context, request))

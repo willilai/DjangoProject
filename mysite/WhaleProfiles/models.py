@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Specie(models.Model):
     name = models.CharField(max_length=500)
@@ -18,9 +19,7 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True
     )
-    verified = models.BooleanField(default=False)
     # If you want to allow a Text or CharField to be empty, use this pairing
     #   of default="" and blank=True instead of null=True.
     #   c.f.: https://docs.djangoproject.com/en/3.0/ref/models/fields/#django.db.models.Field.null
-    title = models.TextField(default="", blank=True)
-    location = models.CharField(max_length=100, default="", blank=True)
+    role = models.CharField(max_length=500)

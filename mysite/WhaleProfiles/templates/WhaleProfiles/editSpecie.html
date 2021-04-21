@@ -1,1 +1,49 @@
-Where the user can edit already existing species
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Edit Specie </title>
+    <!-- imports Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <form method='POST'>
+        <!-- gets the name of the whale -->
+        <div class="form-group">
+        <label for='name'>Name of Whale:</label>
+        <input id='name' name='name' type='text'"/>
+        </div>
+        
+        <!-- gets the number of whales -->
+        <div class="form-group">
+          <label for='numWhale'>Number of Whales:</label>
+          <input id='numWhale' name='numWhale' type='text'"/>
+        </div>
+
+        <!-- gets the diet of the whale -->
+        <div class="form-group">
+          <label for='diet'>Diet of the Whale:</label>
+          <input id='diet' name='diet' type="text"'>
+        </div>
+
+        <!-- gets the size of the whale -->
+        <div class="form-group">
+          <label for='size'>Size of the Whale:</label>
+          <input id='size' name='size' type="text"'>
+        </div>
+
+        <!-- gets the weight of the whale -->
+        <div class="form-group">
+          <label for='weight'>Weight of the Whale:</label>
+          <input id='weight' name='weight' type="text"'>
+        </div>
+      </form>
+      <button type="submit" class="btn btn-danger">Edit</button>
+      Where the user can edit already existing species
+    </div>
+  </body>
+</html>
