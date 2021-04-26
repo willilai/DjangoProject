@@ -8,6 +8,14 @@ from django.views import View
 
 class Index(View):
     def get(self, request):
+        context = {
+
+        }
+
+        template = loader.get_template('WhaleProfiles/index.html')
+        return HttpResponse(template.render(context, request))
+        
+    def post(self, request):
         allUsers = User.objects.all()
         whales = Specie.objects.all()
         if request.method == "POST":
@@ -37,7 +45,30 @@ class Index(View):
 class AddSpecie(View):
     def get(self, request):
         context = {
+        }
+        template = loader.get_template('WhaleProfiles/addSpecie.html')
+        return HttpResponse(template.render(context, request))
 
+    def post(self, request):
+        if request.method == "POST":
+            name = request.POST['name']
+            numWhales = request.POST['numWhales']
+            diet = request.POST['diet']
+            size = request.POST['size']
+            weight = request.POST['weight']
+
+        whale = {
+        'name': name,
+        'numWhales': numWhales,
+        'diet': diet,
+        'size': size,
+        'weight': weight
+        }
+
+        whales.append(whale)
+
+        context = {
+        'whales': whales
         }
         template = loader.get_template('WhaleProfiles/addSpecie.html')
         return HttpResponse(template.render(context, request))
