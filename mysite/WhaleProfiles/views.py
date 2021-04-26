@@ -7,17 +7,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.views import View
 
 class Index(View):
+    allUsers = User.objects.all()
+    whales = Specie.objects.all()
     def get(self, request):
         context = {
-
+        'allUsers': self.allUsers,
+        'whales': self.whales
         }
 
         template = loader.get_template('WhaleProfiles/index.html')
         return HttpResponse(template.render(context, request))
-        
+
     def post(self, request):
-        allUsers = User.objects.all()
-        whales = Specie.objects.all()
         if request.method == "POST":
             # This tests if the form is the log *in* form
             if 'inputUsername' in request.POST.keys():
@@ -36,39 +37,41 @@ class Index(View):
                 logout(request)
 
         context = {
-        'allUsers': allUsers,
-        'whales': whales
+        'allUsers': self.allUsers,
+        'whales': self.whales
         }
-
+        print(context)
         template = loader.get_template('WhaleProfiles/index.html')
         return HttpResponse(template.render(context, request))
 class AddSpecie(View):
+    whales = Specie.objects.all()
     def get(self, request):
         context = {
+        'whales': self.whales
         }
         template = loader.get_template('WhaleProfiles/addSpecie.html')
         return HttpResponse(template.render(context, request))
 
     def post(self, request):
         if request.method == "POST":
-            name = request.POST['name']
-            numWhales = request.POST['numWhales']
-            diet = request.POST['diet']
-            size = request.POST['size']
-            weight = request.POST['weight']
+            inputName = request.POST['name']
+            inputNumber = request.POST['numWhales']
+            inputDiet = request.POST['diet']
+            inputSize = request.POST['size']
+            inputWeight = request.POST['weight']
 
-        whale = {
-        'name': name,
-        'numWhales': numWhales,
-        'diet': diet,
-        'size': size,
-        'weight': weight
-        }
+        whale = Specie(
+            name = inputName,
+            numWhales = inputNumber,
+            diet = inputDiet,
+            size = inputSize,
+            weight = inputWeight
+        )
 
-        whales.append(whale)
+        whale.save()
 
         context = {
-        'whales': whales
+        'whales': self.whales
         }
         template = loader.get_template('WhaleProfiles/addSpecie.html')
         return HttpResponse(template.render(context, request))
