@@ -14,7 +14,7 @@
       <!-- Here, we check if someone is logged in or not.  I created the
         'loggedIn' variable as a Boolean flag: it is easy to check in Python,
         a little less obvious how to do so in the HTML template.  -->
-      {% if loggedIn %}
+      {% if user.is_authenticated %}
 
         <!-- If someone is logged in, we welocme them and give them <thead>
           opportunity to log out. -->
@@ -63,6 +63,7 @@
       {% for user in allUsers %}
       {{user.username}}
       {{user.password}}
+      {{profile.role}}
       <br />
       {% endfor %}
 
@@ -85,6 +86,10 @@
       <a href="/WhaleProfiles/editSpecie">
         Edit Specie
       </a>
+      <!--
+      <a href="/WhaleProfiles/createUser">
+        Create User
+      </a> -->
     </div>
   </body>
 </html>

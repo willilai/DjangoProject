@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Create an Account </title>
+    <!-- imports Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <form method='POST'>
+        {% csrf_token %}
+
+        <!-- gets the username of the new user -->
+        <div class="form-group">
+        <label for='username'>Username:</label>
+        <input id='username' name='username' type='text'/>
+        </div>
+
+        <!-- gets the password of the new user -->
+        <div class="form-group">
+          <label for='password'>Password:</label>
+          <input id='password' name='password' type='text'/>
+        </div>
+
+        <button type="submit">Create</button>
+      </form>
+
+      <br />
+      <a href="/WhaleProfiles/index">
+        Home Page
+      </a>
+    </div>
+  </body>
+</html>

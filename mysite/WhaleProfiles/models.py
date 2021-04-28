@@ -9,6 +9,7 @@ class Specie(models.Model):
     weight = models.IntegerField(default=0)
     def __str__(self):
         return self.name
+        
 class Profile(models.Model):
     """
     This model extends the built-in User model using a OneToOne relationship.

@@ -36,9 +36,14 @@ class Index(View):
                 # If so, don't need to check anything else, just kill the session.
                 logout(request)
 
+        if user.is_authenticated:
+            profile = Profile.objects.get(user=user)
+
         context = {
         'allUsers': self.allUsers,
-        'whales': self.whales
+        'whales': self.whales,
+        'user': user,
+        'profile': profile
         }
         print(context)
         template = loader.get_template('WhaleProfiles/index.html')
@@ -84,3 +89,29 @@ class EditSpecie(View):
         }
         template = loader.get_template('WhaleProfiles/editSpecie.html')
         return HttpResponse(template.render(context, request))
+"""
+class CreateUser(View):
+    allUsers = User.objects.all()
+    def get(self, request):
+        context = {
+            'allUsers': self.allUsers
+        }
+        template = loader.get_template('WhaleProfiles/createUser.html')
+        return HttpResponse(template.render(context, request))
+    def post(self, request):
+        if request.method == "POST":
+            inputUsername = request.POST['username']
+            inputPassword = request.POST['password']
+
+        user = User(
+            username = inputUsername
+            password = inputPassword
+        )
+
+        user.save()
+
+        context = {
+        'allUsers': self.allUsers
+        }
+        template = loader.get_template('WhaleProfiles/createUser.html')
+        return HttpResponse(template.render(context, request))"""
