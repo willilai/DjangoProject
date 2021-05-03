@@ -13,7 +13,7 @@
     <div class="container">
       <form method='POST'>
         {% csrf_token %}
-        
+
         <!-- gets the name of the whale -->
         <div class="form-group">
         <label for='name'>Name of Whale:</label>
@@ -52,6 +52,7 @@
       {{whale.name}}
       {{whale.numWhales}}
       {{whale.diet}}
+      <br />
       {{whale.size}} ft
       {{whale.weight}} tons
       <br />

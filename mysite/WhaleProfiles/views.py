@@ -4,6 +4,7 @@ from django.shortcuts import render
 from .models import Specie, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password
 from django.views import View
 
 class Index(View):
@@ -117,6 +118,7 @@ class EditSpecie(View):
 
 class CreateUser(View):
     allUsers = User.objects.all()
+    allProfiles = Profile.objects.all()
     def get(self, request):
         context = {
             'allUsers': self.allUsers
@@ -127,16 +129,24 @@ class CreateUser(View):
         if request.method == "POST":
             inputUsername = request.POST['username']
             inputPassword = request.POST['password']
+            inputRole = request.POST['role']
 
         user = User(
-            username = inputUsername
-            password = inputPassword
+            username = inputUsername,
+            password = make_password(inputPassword)
         )
-
         user.save()
 
+        profile = Profile(
+            user = user,
+            role = inputRole
+        )
+
+        profile.save()
+
         context = {
-        'allUsers': self.allUsers
+            'allUsers': self.allUsers,
+            'allProfiles': self.allProfiles
         }
         template = loader.get_template('WhaleProfiles/createUser.html')
         return HttpResponse(template.render(context, request))
