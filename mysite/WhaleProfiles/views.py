@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import render
-from .models import Specie
+from .models import Specie, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
@@ -28,6 +28,15 @@ class Index(View):
                 if user is not None:
                     # IF success, then use the login function so the session persists.
                     login(request, user)
+                    if user.is_authenticated:
+                        profile = Profile.objects.get(user=user)
+
+                    context = {
+                    'allUsers': self.allUsers,
+                    'whales': self.whales,
+                    'user': user,
+                    'profile': profile
+                    }
                 else:
                     pass
                     # Message for failed login.
@@ -36,16 +45,10 @@ class Index(View):
                 # If so, don't need to check anything else, just kill the session.
                 logout(request)
 
-        if user.is_authenticated:
-            profile = Profile.objects.get(user=user)
-
         context = {
         'allUsers': self.allUsers,
-        'whales': self.whales,
-        'user': user,
-        'profile': profile
+        'whales': self.whales
         }
-        print(context)
         template = loader.get_template('WhaleProfiles/index.html')
         return HttpResponse(template.render(context, request))
 class AddSpecie(View):
@@ -82,14 +85,36 @@ class AddSpecie(View):
         return HttpResponse(template.render(context, request))
 
 class EditSpecie(View):
+    whales = Specie.objects.all()
     def get(self, request):
-        whales = Specie.objects.all()
         context = {
-                'whales': whales
+                'whales': self.whales
         }
         template = loader.get_template('WhaleProfiles/editSpecie.html')
         return HttpResponse(template.render(context, request))
-"""
+    def post(self, request):
+        if request.method == "POST":
+            inputName = request.POST['name']
+            inputNumber = request.POST['numWhales']
+            inputDiet = request.POST['diet']
+            inputSize = request.POST['size']
+            inputWeight = request.POST['weight']
+
+        for whale in self.whales:
+            if whale.name == inputName:
+                whale.name = inputName
+                whale.numWhales = inputNumber
+                whale.diet = inputDiet
+                whale.size = inputSize
+                whale.weight = inputWeight
+
+
+        context = {
+        'whales': self.whales
+        }
+        template = loader.get_template('WhaleProfiles/editSpecie.html')
+        return HttpResponse(template.render(context, request))
+
 class CreateUser(View):
     allUsers = User.objects.all()
     def get(self, request):
@@ -114,4 +139,4 @@ class CreateUser(View):
         'allUsers': self.allUsers
         }
         template = loader.get_template('WhaleProfiles/createUser.html')
-        return HttpResponse(template.render(context, request))"""
+        return HttpResponse(template.render(context, request))

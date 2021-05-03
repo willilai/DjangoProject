@@ -12,6 +12,8 @@
   <body>
     <div class="container">
       <form method='POST'>
+        {% csrf_token %}
+        
         <!-- gets the name of the whale -->
         <div class="form-group">
         <label for='name'>Name of Whale:</label>
@@ -41,8 +43,20 @@
           <label for='weight'>Weight of the Whale:</label>
           <input id='weight' name='weight' type="text">
         </div>
+        <button type="submit" class="btn btn-danger">Edit</button>
       </form>
-      <button type="submit" class="btn btn-danger">Edit</button>
+
+
+      <br />
+      {% for whale in whales %}
+      {{whale.name}}
+      {{whale.numWhales}}
+      {{whale.diet}}
+      {{whale.size}} ft
+      {{whale.weight}} tons
+      <br />
+      {% endfor %}
+
       <br />
       Where the user can edit already existing species
       <a href="/WhaleProfiles/addSpecie">
