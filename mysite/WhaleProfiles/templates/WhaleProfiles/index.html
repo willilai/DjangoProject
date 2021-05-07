@@ -58,11 +58,16 @@
           <button type="submit" class="btn btn-danger">Login</button>
         </form>
       {% endif %}
-
+<!--
       <br />
       {% for user in allUsers %}
       {{user.username}}
       {{user.password}}
+      {{profile.role}}
+      <br />
+      {% endfor %}-->
+
+      {% for profile in allProfiles %}
       {{profile.role}}
       <br />
       {% endfor %}
@@ -72,7 +77,7 @@
       {{whale.name}}
       {{whale.numWhales}}
       {{whale.diet}}
-      <br />
+      <!--<br />-->
       {{whale.size}} ft
       {{whale.weight}} tons
       <br />
@@ -80,7 +85,6 @@
 
 
       <!-- End login/logout section. -->
-      Account Login/Sign Up, Species list to see data for each species.
       <a href="/WhaleProfiles/addSpecie">
         Add Specie
       </a>

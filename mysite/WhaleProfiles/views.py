@@ -9,10 +9,12 @@ from django.views import View
 
 class Index(View):
     allUsers = User.objects.all()
+    allProfiles = Profile.objects.all()
     whales = Specie.objects.all()
     def get(self, request):
         context = {
         'allUsers': self.allUsers,
+        'allProfiles': self.allProfiles,
         'whales': self.whales
         }
 
@@ -48,6 +50,7 @@ class Index(View):
 
         context = {
         'allUsers': self.allUsers,
+        'allProfiles': self.allProfiles,
         'whales': self.whales
         }
         template = loader.get_template('WhaleProfiles/index.html')
@@ -56,7 +59,8 @@ class AddSpecie(View):
     whales = Specie.objects.all()
     def get(self, request):
         context = {
-        'whales': self.whales
+        'whales': self.whales,
+        'user': request.user
         }
         template = loader.get_template('WhaleProfiles/addSpecie.html')
         return HttpResponse(template.render(context, request))
@@ -89,7 +93,8 @@ class EditSpecie(View):
     whales = Specie.objects.all()
     def get(self, request):
         context = {
-                'whales': self.whales
+                'whales': self.whales,
+                'user': request.user
         }
         template = loader.get_template('WhaleProfiles/editSpecie.html')
         return HttpResponse(template.render(context, request))

@@ -11,6 +11,7 @@
 
   <body>
     <div class="container">
+      {% if user.profile.role == "Marine Biologist" %}
       <form method='POST'>
         {% csrf_token %}
 
@@ -52,14 +53,18 @@
       {{whale.name}}
       {{whale.numWhales}}
       {{whale.diet}}
-      <br />
+      <!--<br />-->
       {{whale.size}} ft
       {{whale.weight}} tons
       <br />
       {% endfor %}
+      <br />
+
+      {% else %}
+      Don't have access to this page
+      {% endif %}
 
       <br />
-      Where the user can edit already existing species
       <a href="/WhaleProfiles/addSpecie">
         Add Specie
       </a>
