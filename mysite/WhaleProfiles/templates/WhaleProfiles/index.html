@@ -10,91 +10,80 @@
   </head>
 
   <body>
-    <div class="container">
-      <!-- Here, we check if someone is logged in or not.  I created the
-        'loggedIn' variable as a Boolean flag: it is easy to check in Python,
-        a little less obvious how to do so in the HTML template.  -->
+    <!-- creates a navbar -->
+    <nav class="navbar navbar-expand-sm bg-secondary ">
       {% if user.is_authenticated %}
+      <ul class="navbar-nav navbar-right">
+        <h3 style="margin-left: 1em;">Welcome, {{ user.username }}</h3>
 
-        <!-- If someone is logged in, we welocme them and give them <thead>
-          opportunity to log out. -->
-        <h3>Welcome, {{ user.username }}</h3>
-
-        <!-- Use POST for sure any time you are dealing with login/logout info.
-          In general, you should use POST unless you have a good reason not to.
-          The main reason to use GET instead is if you want the input data to be
-          transfereable in the URL; GET puts all data submissions in the URL. -->
-        <form style="padding-bottom:1em;" method="POST">
-          <!-- Every <form> element needs a csrf_token as a security precaution. -->
+        <form style="margin-left: 1em;" method="POST">
           {% csrf_token %}
-          <!-- I use the hidden input element to send along the information that
-            we are logging out. -->
           <input type="hidden" name="logout" value="logout"></input>
           <button type="submit" class="btn btn-danger">Logout</button>
         </form>
-
-      <!-- If no user is logged in, give them a chance to do so. -->
+      </ul>
       {% else %}
 
-        <!-- Again, use POST method, and include a csrf_token -->
-        <form style="padding-bottom:1em;" method="POST">
+      <!-- holds the links to the four different pages -->
+      <ul class="navbar-nav pull-right">
+        <form method="POST">
           {% csrf_token %}
 
           <!-- Give the user a place to type in their name and passowrd. -->
-          <div class="form-group">
-            <label for="inputUsername">Username</label>
-            <input type="text" class="form-control" name="inputUsername" id="inputUsername" />
-          </div>
+          <li class="nav-item">
+            <div class="form-inline">
+              <label style="margin-left: 1em;" for="inputUsername">Username: </label>
+              <input style="margin-left: 1em;" type="text" class="form-control" name="inputUsername" id="inputUsername" />
 
-          <!-- Notice that we use password as the <input> type so that it blocks
-            out the characters as you type; otherwise, it is just a text box. -->
-          <div class="form-group">
-            <label for="inputPassword">Password</label>
-            <input type="password" class="form-control" name="inputPassword" id="inputPassword" />
-          </div>
+              <label style="margin-left: 1em;" for="inputPassword">Password: </label>
+              <input style="margin-left: 1em;" type="password" class="form-control" name="inputPassword" id="inputPassword" />
 
-          <!-- Bootstrap likes <button> elements with type="submit" instead
-            <input> elements with type="submit" -->
-          <button type="submit" class="btn btn-danger">Login</button>
+              <button style="margin-left: 1em;" type="submit" class="btn btn-danger">Login</button>
+            </div>
         </form>
+      </ul>
       {% endif %}
-<!--
-      <br />
-      {% for user in allUsers %}
-      {{user.username}}
-      {{user.password}}
-      {{profile.role}}
-      <br />
-      {% endfor %}-->
+    </nav>
+    <br>
 
-      {% for profile in allProfiles %}
-      {{profile.role}}
-      <br />
-      {% endfor %}
+    <div class="container">
+      <div>
+        <table class="col-6 col-sm-4 col-lg-8 table table-striped">
+            <thread class = "thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Population</th>
+                <th>Diet</th>
+                <th>Size</th>
+                <th>Weight</th>
+              </tr>
+            </thread>
+                {% for whale in whales %}
+                  <tr>
+                    <td>{{whale.name}}</td>
+                    <td>{{whale.numWhales}}</td>
+                    <td>{{whale.diet}}</td>
+                    <!--<br />-->
+                    <td>{{whale.size}} ft</td>
+                    <td>{{whale.weight}} ton(s)</td>
+                    <br />
+                  </tr>
+                {% endfor %}
+          </table>
+        <br />
+      </div>
 
-      <br />
-      {% for whale in whales %}
-      {{whale.name}}
-      {{whale.numWhales}}
-      {{whale.diet}}
-      <!--<br />-->
-      {{whale.size}} ft
-      {{whale.weight}} tons
-      <br />
-      {% endfor %}
-
-
-      <!-- End login/logout section. -->
-      <a href="/WhaleProfiles/addSpecie">
-        Add Specie
-      </a>
-      <a href="/WhaleProfiles/editSpecie">
-        Edit Specie
-      </a>
-
-      <a href="/WhaleProfiles/createUser">
-        Create User
-      </a>
+      <div>
+        <a href="/WhaleProfiles/addSpecie">
+          Add Specie
+        </a>
+        <a href="/WhaleProfiles/editSpecie">
+          Edit Specie
+        </a>
+        <a href="/WhaleProfiles/createUser">
+          Create User
+        </a>
+      </div>
     </div>
   </body>
 </html>
