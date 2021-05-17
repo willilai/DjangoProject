@@ -113,8 +113,7 @@ class EditSpecie(View):
                 whale.diet = inputDiet
                 whale.size = inputSize
                 whale.weight = inputWeight
-
-
+            whale.save()
         context = {
         'whales': self.whales
         }

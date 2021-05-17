@@ -58,17 +58,17 @@
                 <th>Weight</th>
               </tr>
             </thread>
-                {% for whale in whales %}
-                  <tr>
-                    <td>{{whale.name}}</td>
-                    <td>{{whale.numWhales}}</td>
-                    <td>{{whale.diet}}</td>
-                    <!--<br />-->
-                    <td>{{whale.size}} ft</td>
-                    <td>{{whale.weight}} ton(s)</td>
-                    <br />
-                  </tr>
-                {% endfor %}
+            {% for whale in whales %}
+              <tr>
+                <td>{{whale.name}}</td>
+                <td>{{whale.numWhales}}</td>
+                <td>{{whale.diet}}</td>
+                <!--<br />-->
+                <td>{{whale.size}} ft</td>
+                <td>{{whale.weight}} ton(s)</td>
+                <br />
+              </tr>
+            {% endfor %}
           </table>
         <br />
       </div>
