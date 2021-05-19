@@ -11,6 +11,7 @@
 
   <body>
     <div class="container">
+      <h2> Add Species </h2>
       {% if user.profile.role == "Marine Biologist" %}
       <form method='POST'>
         {% csrf_token %}
@@ -54,12 +55,16 @@
       {% endif %}
 
       <br />
-      <a href="/WhaleProfiles/index">
-        Home Page
-      </a>
-      <a href="/WhaleProfiles/editSpecie">
-        Edit Specie
-      </a>
+      <button type="button" class="btn btn-primary">
+        <a href="/WhaleProfiles/index" style="color:white">
+          Home Page
+        </a>
+      </button>
+      <button type="button" class="btn btn-primary">
+        <a href="/WhaleProfiles/editSpecie" style="color:white">
+          Edit Specie
+        </a>
+      </button>
     </div>
   </body>
 </html>

@@ -41,6 +41,11 @@
               <button style="margin-left: 1em;" type="submit" class="btn btn-danger">Login</button>
             </div>
         </form>
+        <button type="button" class="btn btn-danger">
+          <a href="/WhaleProfiles/createUser" style="color:white">
+            Create User
+          </a>
+        </button>
       </ul>
       {% endif %}
     </nav>
@@ -58,15 +63,13 @@
                 <th>Weight</th>
               </tr>
             </thread>
-            {% for whale in whales %}
+             {% for whale in whales %}
               <tr>
                 <td>{{whale.name}}</td>
                 <td>{{whale.numWhales}}</td>
                 <td>{{whale.diet}}</td>
-                <!--<br />-->
                 <td>{{whale.size}} ft</td>
                 <td>{{whale.weight}} ton(s)</td>
-                <br />
               </tr>
             {% endfor %}
           </table>
@@ -74,15 +77,16 @@
       </div>
 
       <div>
-        <a href="/WhaleProfiles/addSpecie">
-          Add Specie
-        </a>
-        <a href="/WhaleProfiles/editSpecie">
-          Edit Specie
-        </a>
-        <a href="/WhaleProfiles/createUser">
-          Create User
-        </a>
+        <button type="button" class="btn btn-primary">
+          <a href="/WhaleProfiles/addSpecie" style="color:white">
+            Add Specie
+          </a>
+        </button>
+        <button type="button" class="btn btn-primary">
+          <a href="/WhaleProfiles/editSpecie" style="color:white">
+            Edit Specie
+          </a>
+        </button>
       </div>
     </div>
   </body>

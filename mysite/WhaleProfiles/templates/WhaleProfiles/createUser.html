@@ -11,6 +11,7 @@
 
   <body>
     <div class="container">
+      <h2> Create a User </h2>
       <form method='POST'>
         {% csrf_token %}
 
@@ -35,9 +36,11 @@
       </form>
 
       <br />
-      <a href="/WhaleProfiles/index">
-        Home Page
-      </a>
+      <button type="button" class="btn btn-primary">
+        <a href="/WhaleProfiles/index" style="color:white">
+          Home Page
+        </a>
+      </button>
     </div>
   </body>
 </html>

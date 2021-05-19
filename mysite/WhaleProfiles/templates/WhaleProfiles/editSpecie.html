@@ -11,14 +11,16 @@
 
   <body>
     <div class="container">
+      <h2> Edit Species </h2>
       {% if user.profile.role == "Marine Biologist" %}
       <form method='POST'>
         {% csrf_token %}
 
         <!-- gets the name of the whale -->
         <div class="form-group">
-        <label for='name'>Name of Whale:</label>
-        <input id='name' name='name' type='text'/>
+          <label for='name'>Name of Whale:</label>
+          <input id='name' name='name' type='text'/>
+          (name of species you want to edit)
         </div>
 
         <!-- gets the number of whales -->
@@ -47,30 +49,21 @@
         <button type="submit" class="btn btn-danger">Edit</button>
       </form>
 
-
-      <br />
-      {% for whale in whales %}
-      {{whale.name}}
-      {{whale.numWhales}}
-      {{whale.diet}}
-      <!--<br />-->
-      {{whale.size}} ft
-      {{whale.weight}} tons
-      <br />
-      {% endfor %}
-      <br />
-
       {% else %}
-      Don't have access to this page
+        Don't have access to this page
       {% endif %}
 
       <br />
-      <a href="/WhaleProfiles/addSpecie">
-        Add Specie
-      </a>
-      <a href="/WhaleProfiles/index">
-        Home Page
-      </a>
+      <button type="button" class="btn btn-primary">
+        <a href="/WhaleProfiles/addSpecie" style="color:white">
+          Add Specie
+        </a>
+      </button>
+      <button type="button" class="btn btn-primary">
+        <a href="/WhaleProfiles/index" style="color:white">
+          Home Page
+        </a>
+      </button>
     </div>
   </body>
 </html>
