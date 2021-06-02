@@ -12,20 +12,22 @@
   <body>
     <!-- creates a navbar -->
     <nav class="navbar navbar-expand-sm bg-secondary ">
+      <!-- only displays if the user is logged in -->
       {% if user.is_authenticated %}
-      <ul class="navbar-nav navbar-right">
-        <h3 style="margin-left: 1em;">Welcome, {{ user.username }}</h3>
+      <ul class="navbar-nav navbar-right ml-auto">
+        <h3>Welcome, {{ user.username }}</h3>
 
+        <!-- lets the user logout -->
         <form style="margin-left: 1em;" method="POST">
           {% csrf_token %}
           <input type="hidden" name="logout" value="logout"></input>
           <button type="submit" class="btn btn-danger">Logout</button>
         </form>
       </ul>
+      <!-- only dislays if the user isn't logged in -->
       {% else %}
-
-      <!-- holds the links to the four different pages -->
-      <ul class="navbar-nav pull-right">
+      <ul class="navbar-nav pull-right ml-auto">
+        <!-- collects data from the user -->
         <form method="POST">
           {% csrf_token %}
 
@@ -38,13 +40,15 @@
               <label style="margin-left: 1em;" for="inputPassword">Password: </label>
               <input style="margin-left: 1em;" type="password" class="form-control" name="inputPassword" id="inputPassword" />
 
+              <!-- a button to send the username and password the user entered -->
               <button style="margin-left: 1em;" type="submit" class="btn btn-danger">Login</button>
             </div>
         </form>
       </ul>
       {% endif %}
 
-      <button type="button" class="btn btn-danger" style="margin-left: 1em;">
+      <!-- a button the user can click that goes to a new page to create a new user -->
+      <button type="button" class="btn btn-warning" style="margin-left: 1em;">
         <a href="/WhaleProfiles/createUser" style="color:white">
           Create User
         </a>
@@ -54,6 +58,10 @@
 
     <div class="container">
       <div>
+        <h1>
+          Species of Whales
+        </h1>
+        <!-- a table that displays all the species of whales in the database -->
         <table class="col-6 col-sm-4 col-lg-8 table table-striped">
             <thread class = "thead-light">
               <tr>
@@ -78,12 +86,14 @@
       </div>
 
       <div>
-        <button type="button" class="btn btn-primary">
+        <!-- a button to a new page where the user can add a new species -->
+        <button type="button" class="btn btn-primary" style="margin-left: 1em;">
           <a href="/WhaleProfiles/addSpecie" style="color:white">
             Add Specie
           </a>
         </button>
-        <button type="button" class="btn btn-primary">
+        <!-- a button to a new page where the user can edit an existing species -->
+        <button type="button" class="btn btn-primary" style="margin-left: 1em;">
           <a href="/WhaleProfiles/editSpecie" style="color:white">
             Edit Specie
           </a>

@@ -12,7 +12,9 @@
   <body>
     <div class="container">
       <h2> Edit Species </h2>
+      <!-- only accesible to users whose roles are marine biologist -->
       {% if user.profile.role == "Marine Biologist" %}
+      <!-- collects data from the user -->
       <form method='POST'>
         {% csrf_token %}
 
@@ -49,21 +51,32 @@
         <button type="submit" class="btn btn-danger">Edit</button>
       </form>
 
+      <!-- if the user's role isn't a marine biologist -->
       {% else %}
         Don't have access to this page
       {% endif %}
 
       <br />
-      <button type="button" class="btn btn-primary">
-        <a href="/WhaleProfiles/addSpecie" style="color:white">
-          Add Specie
-        </a>
-      </button>
-      <button type="button" class="btn btn-primary">
-        <a href="/WhaleProfiles/index" style="color:white">
-          Home Page
-        </a>
-      </button>
+      <div>
+        <!-- a button to return to the home page -->
+        <button type="button" class="btn btn-primary" style="margin-left: 1em;">
+          <a href="/WhaleProfiles/index" style="color:white">
+            Home Page
+          </a>
+        </button>
+        <!-- a button to a new page where the user can add a new species -->
+        <button type="button" class="btn btn-primary" style="margin-left: 1em;">
+          <a href="/WhaleProfiles/addSpecie" style="color:white">
+            Add Specie
+          </a>
+        </button>
+        <!-- a button the user can click that goes to a new page to create a new user -->
+        <button type="button" class="btn btn-warning" style="margin-left: 1em;">
+          <a href="/WhaleProfiles/createUser" style="color:white">
+            Create User
+          </a>
+        </button>
+      </div>
     </div>
   </body>
 </html>
